@@ -40,8 +40,7 @@ RSpec.describe "Users", type: :request do
         end.to_not change(User, :count)
 
         expect(response.status).to eq(422)
-
-        expect(CGI.unescapeHTML(response.body)).to include("Password confirmation doesn't match Password")
+        expect(CGI.unescapeHTML(response.body)).to include("Passwords do not match")
       end
 
       it "does not register user with mismatched passwords" do
@@ -52,8 +51,7 @@ RSpec.describe "Users", type: :request do
         end.to_not change(User, :count)
 
         expect(response.status).to eq(422)
-
-        expect(CGI.unescapeHTML(response.body)).to include("Password confirmation doesn't match Password")
+        expect(CGI.unescapeHTML(response.body)).to include("Passwords do not match")
       end
     end
   end
