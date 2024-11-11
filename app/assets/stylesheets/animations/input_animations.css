@@ -1,0 +1,33 @@
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.input-custom {
+    width: 100%;
+    padding: 0.5rem 0.25rem;
+    border: none;
+    border-bottom: 2px solid #d1d5db;
+    outline: none;
+    position: relative;
+}
+
+.input-wrapper::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #3b82f6;
+    transition: width 0.3s ease-out;
+}
+
+.input-custom:focus {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.input-wrapper:focus-within::after {
+    width: 100%;
+}
