@@ -58,3 +58,7 @@ dump.rdb
 !/app/assets/builds/.keep
 
 .github
+
+# specs
+.rspec-local
+spec/examples.txt

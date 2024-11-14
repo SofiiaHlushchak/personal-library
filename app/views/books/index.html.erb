@@ -1,0 +1,18 @@
+<div class="max-w-max mx-auto">
+  <h2 class="text-3xl font-bold mb-4">Books List</h2>
+  <p class="text-gray-600 text-sm mb-4">
+    Here are all available books. Click on a book to view more details.
+  </p>
+
+  <div class="bg-white border border-[#E2E4E5] rounded-md shadow-md p-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <% @books.each do |book| %>
+        <div class="border p-4 rounded-md shadow-md">
+          <h3 class="text-xl font-semibold mb-2"><%= book.title %></h3>
+          <p class="text-gray-600 text-sm mb-4"><%= book.author %></p>
+          <%= link_to 'View Details', book_path(book), class: "px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

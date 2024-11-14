@@ -1,0 +1,32 @@
+<%= form_with(model: book, local: true, class: "space-y-4") do |f| %>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+    <% fields = [
+      { attribute: :title, label: "Book Title", type: :text_field },
+      { attribute: :author, label: "Author", type: :text_field },
+      { attribute: :description, label: "Description", type: :text_area, span: "sm:col-span-2" },
+      { attribute: :pages, label: "Number of Pages", type: :number_field },
+      { attribute: :age_limit, label: "Age Limit", type: :number_field },
+      { attribute: :published_year, label: "Published Year", type: :number_field }
+    ] %>
+
+    <% fields.each do |field| %>
+      <div class="space-y-2 mb-4 <%= field[:span] %>">
+        <div class="input-wrapper">
+          <%= f.label field[:attribute], field[:label], class: "text-gray-700 font-medium" %>
+          <%= f.public_send(field[:type], field[:attribute], class: "input-custom w-full") %>
+        </div>
+        <% if f.object.errors[field[:attribute]].any? %>
+          <div class="text-red-500 text-sm mt-1">
+            <%= f.object.errors[field[:attribute]].join(", ") %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+
+  <div class="mb-4">
+    <%= f.submit "Add Book", class: "px-8 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors" %>
+  </div>
+<% end %>
