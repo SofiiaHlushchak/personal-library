@@ -1,0 +1,20 @@
+<div class="max-w-max mx-auto">
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <h2 class="text-3xl font-bold mb-4">Book Details</h2>
+  
+  <div class="bg-white border border-[#E2E4E5] rounded-md shadow-md p-8">
+    <div class="space-y-4">
+      <h3 class="text-2xl font-semibold mb-2"><%= @book.title %></h3>
+      <p class="text-gray-600 text-sm mb-4">Author: <%= @book.author %></p>
+      <p class="text-gray-700 text-lg"><%= @book.description %></p>
+      
+      <div class="mt-4">
+        <%= link_to 'Back to Books', books_path, class: "px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors" %>
+      </div>
+    </div>
+  </div>
+</div>
