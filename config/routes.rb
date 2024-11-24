@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
 
   root "home#index"
-  resources :books, only: [:index, :show, :new, :create]
+  resources :books
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

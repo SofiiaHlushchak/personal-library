@@ -13,6 +13,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  role                   :string           default("user")
 #  username               :string           not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -116,6 +117,21 @@ RSpec.describe User, type: :model do
         expect(subject).to_not be_valid
         expect(subject.errors[:username]).to include("Username has already been taken")
       end
+    end
+  end
+
+  describe "roles" do
+    let(:admin) { create(:admin) }
+    let(:user) { create(:user) }
+
+    it "should allow user to be an admin" do
+      expect(admin.admin?).to be_truthy
+      expect(user.admin?).to be_falsey
+    end
+
+    it "should allow user to be a regular user" do
+      expect(user.user?).to be_truthy
+      expect(admin.user?).to be_falsey
     end
   end
 end
