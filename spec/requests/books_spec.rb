@@ -68,4 +68,38 @@ RSpec.describe "Books", type: :request do
       end
     end
   end
+
+  describe "DELETE /books/:id" do
+    let(:admin) { create(:admin) }
+    let(:user) { create(:user) }
+    let!(:book) { create(:book) }
+
+    context "when user is admin" do
+      before { sign_in admin }
+
+      it "deletes the book and responds with turbo stream" do
+        expect do
+          delete book_path(book), headers: { "Accept" => "text/vnd.turbo-stream.html" }
+        end.to change(Book, :count).by(-1)
+
+        expect(response.body).to include("<turbo-stream action=\"remove\" target=\"book_#{book.id}\">")
+      end
+    end
+
+    context "when user is regular" do
+      before { sign_in user }
+
+      it "does not allow regular user to delete the book" do
+        expect do
+          delete book_path(book)
+        end.to_not change(Book, :count)
+
+        expect(response).to redirect_to(root_path)
+
+        follow_redirect!
+
+        expect(flash[:alert]).to include("You are not authorized to perform this action.")
+      end
+    end
+  end
 end

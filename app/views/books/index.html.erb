@@ -7,10 +7,15 @@
   <div class="bg-white border border-[#E2E4E5] rounded-md shadow-md p-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <% @books.each do |book| %>
-        <div class="border p-4 rounded-md shadow-md">
+        <div id="book_<%= book.id %>" class="border p-4 rounded-md shadow-md">
           <h3 class="text-xl font-semibold mb-2"><%= book.title %></h3>
           <p class="text-gray-600 text-sm mb-4"><%= book.author %></p>
-          <%= link_to 'View Details', book_path(book), class: "px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors" %>
+          <div class="flex space-x-2">
+            <%= link_to 'View Details', book_path(book), class: "px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors" %>
+            <% if policy(book).destroy? %>  <!-- Перевірка прав доступу через Pundit -->
+              <%= link_to 'Delete', book_path(book), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors" %>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>

@@ -15,6 +15,7 @@ gem "turbo-rails"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "bootsnap", require: false
+gem "pundit", "~> 2.4"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do
