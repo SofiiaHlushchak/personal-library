@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :admin do
     resources :categories, only: [:index, :new, :create, :destroy]
+    resources :users
   end
 end

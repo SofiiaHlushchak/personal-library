@@ -1,0 +1,34 @@
+<%= form_with model: @user, url: @user.new_record? ? admin_users_path : admin_user_path(@user), method: @user.new_record? ? :post : :patch, local: true, data: { turbo: false }, class: 'space-y-4' do |f| %>
+  <div class="grid grid-cols-2 gap-4">
+    <% fields = [
+      { name: :first_name, label: "First Name", additional_classes: "", type: :text_field },
+      { name: :last_name, label: "Last Name", additional_classes: "", type: :text_field },
+      { name: :username, label: "Username", additional_classes: "", type: :text_field },
+      { name: :email, label: "Enter email", additional_classes: "", type: :text_field },
+      { name: :birthdate, label: "Date of Birth", additional_classes: "datepicker", type: :text_field },
+      { name: :role, label: "Role", type: :select, additional_classes: "", options: User::ROLES.map { |role| [role.humanize, role] } }
+    ] %>
+
+    <% fields.each do |field| %>
+      <div class="space-y-2 mb-4">
+        <div class="input-wrapper">
+          <%= f.label field[:name], field[:label], class: "text-gray-700 font-medium" %>
+          <% if field[:type] == :select %>
+            <%= f.select field[:name], field[:options], { prompt: "Select a #{field[:label]}" }, class: "input-custom #{field[:additional_classes]}" %>
+          <% else %>
+            <%= f.public_send(field[:type], field[:name], class: "input-custom #{field[:additional_classes]}") %>
+          <% end %>
+        </div>
+        <% if f.object.errors[field[:name]].any? %>
+          <div class="text-red-500 text-sm mt-1">
+            <%= f.object.errors[field[:name]].join(", ") %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= f.submit @user.new_record? ? 'Create User' : 'Update User', class: "px-8 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors mr-4" %>
+    </div>
+  </div>
+<% end %>

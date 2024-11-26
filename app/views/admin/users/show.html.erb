@@ -1,0 +1,15 @@
+<div class="container mx-auto mt-12 px-4 max-w-lg">
+  <h1 class="text-3xl font-bold text-center mb-6">User Details</h1>
+
+  <div class="p-6 border border-gray-300 rounded-lg shadow-sm">
+    <h2 class="text-lg font-semibold mb-2"><%= @user.first_name %> <%= @user.last_name %></h2>
+    <p class="text-sm text-gray-600 mb-1">Email: <%= @user.email %></p>
+    <p class="text-sm text-gray-600 mb-1">Username: <%= @user.username %></p>
+    <p class="text-sm text-gray-600">Role: <%= @user.role %></p>
+  </div>
+
+  <div class="mt-6 flex justify-between">
+    <%= link_to 'Edit', edit_admin_user_path(@user), class: 'px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600' %>
+    <%= link_to 'Back', admin_users_path, class: 'px-4 py-2 bg-gray-500 text-white rounded-lg shadow hover:bg-gray-600' %>
+  </div>
+</div>
