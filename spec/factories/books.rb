@@ -13,10 +13,16 @@
 #  title          :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  category_id    :bigint           not null
 #
 # Indexes
 #
-#  index_books_on_title  (title) UNIQUE
+#  index_books_on_category_id  (category_id)
+#  index_books_on_title        (title) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (category_id => categories.id)
 #
 FactoryBot.define do
   factory :book do
@@ -26,5 +32,7 @@ FactoryBot.define do
     age_limit { 12 }
     description { "A sample description for the book." }
     published_year { 2020 }
+
+    association :category
   end
 end

@@ -24,6 +24,18 @@
       </div>
     <% end %>
 
+    <div class="space-y-2 mb-4 sm:col-span-2">
+      <div class="input-wrapper">
+        <%= f.label :category_id, "Category", class: "text-gray-700 font-medium" %>
+        <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a Category" }, class: "input-custom w-full" %>
+      </div>
+      <% if f.object.errors[:category_id].any? %>
+        <div class="text-red-500 text-sm mt-1">
+          <%= f.object.errors[:category_id].join(", ") %>
+        </div>
+      <% end %>
+    </div>
+
   </div>
 
   <div class="mb-4">

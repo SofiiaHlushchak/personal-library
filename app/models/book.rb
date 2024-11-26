@@ -13,13 +13,21 @@
 #  title          :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  category_id    :bigint           not null
 #
 # Indexes
 #
-#  index_books_on_title  (title) UNIQUE
+#  index_books_on_category_id  (category_id)
+#  index_books_on_title        (title) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (category_id => categories.id)
 #
 
 class Book < ApplicationRecord
+  belongs_to :category
+
   validates :title, presence: { message: :blank }
   validates :author, presence: { message: :blank }
   validates :pages, presence: { message: :blank }
