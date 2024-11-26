@@ -39,6 +39,7 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  gem "shoulda-matchers", "~> 6.2"
 end
 
 gem "tailwindcss-rails", "~> 3.0"

@@ -40,7 +40,8 @@ RSpec.describe "Books", type: :request do
 
   describe "POST /books" do
     context "with valid attributes" do
-      let(:book_params) { build(:book) }
+      let(:category) { create(:category) }
+      let(:book_params) { build(:book, category: category) }
 
       it "creates a new book and redirects to the book show page" do
         post books_path, params: { book: book_params.attributes }
