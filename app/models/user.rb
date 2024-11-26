@@ -36,6 +36,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  scope :sorted_by_first_name, -> { order(:first_name) }
+
   def admin?
     role == "admin"
   end
